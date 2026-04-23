@@ -6,7 +6,7 @@ from passlib.context import CryptContext
 from app.core.config import settings
 
 ALGORITHM = "HS256"
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 
 def hash_password(password: str) -> str:
@@ -23,3 +23,4 @@ def create_access_token(subject: str, role: str) -> str:
     )
     payload = {"sub": subject, "role": role, "exp": expires_at}
     return jwt.encode(payload, settings.secret_key, algorithm=ALGORITHM)
+# tedghtd
